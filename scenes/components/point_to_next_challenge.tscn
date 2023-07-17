@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0parfryyenau"]
+
+[ext_resource type="Script" path="res://scripts/point_to_next_challenge.gd" id="1_ly886"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6rixy"]
+radius = 1.0
+
+[node name="PointToNextChallenge" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
+script = ExtResource("1_ly886")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 0, 0)
+shape = SubResource("SphereShape3D_6rixy")
+
+[node name="Wait" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Wait" to="." method="_on_timer_timeout"]
