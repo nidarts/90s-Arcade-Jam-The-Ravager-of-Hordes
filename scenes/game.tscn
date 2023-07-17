@@ -1,3 +1,181 @@
-[gd_scene format=3 uid="uid://d0bfn451ha1lf"]
+[gd_scene load_steps=16 format=3 uid="uid://d0bfn451ha1lf"]
 
-[node name="Game" type="Node"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_yxuc1"]
+[ext_resource type="Script" path="res://scripts/Box.gd" id="2_e6vb0"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="2_g0ul8"]
+[ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="3_sloeb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_34ep0"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_mpev4"]
+sky_material = SubResource("ProceduralSkyMaterial_34ep0")
+
+[sub_resource type="Environment" id="Environment_ers5n"]
+background_mode = 2
+sky = SubResource("Sky_mpev4")
+tonemap_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_j7qxp"]
+size = Vector3(20, 0.2, 20)
+
+[sub_resource type="Curve3D" id="Curve3D_hcm3x"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.0225956, 0, 8.06031, -0.515196, 0, 4.78396, 0.515196, 0, -4.78396, -4.13577, 0, 0.589969, 0, 0, 0, 0, 0, 0, -0.235003, 0, -7.87396),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[sub_resource type="Curve3D" id="Curve3D_cjrlr"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.479906, 0, -7.85829, -3.56437, 0, -1.14476, 3.56437, 0, 1.14476, 4.38251, 0, 0.207088, 0, 0, 0, 0, 0, 0, 7.34848, 0, 8.37653),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_865dd"]
+height = 1.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_vpk2a"]
+size = Vector3(0.2, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ix7ev"]
+albedo_color = Color(0.0705882, 0.945098, 0.988235, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bje2j"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1887g"]
+
+[node name="Game" type="Node" node_paths=PackedStringArray("pathes", "pathes_remote")]
+script = ExtResource("1_yxuc1")
+pathes = [NodePath("Path3D/PathFollow3D"), NodePath("Path3D2/PathFollow3D")]
+pathes_remote = [NodePath("Path3D/PathFollow3D/RemoteTransform3D"), NodePath("Path3D2/PathFollow3D/RemoteTransform3D")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ers5n")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("BoxMesh_j7qxp")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_hcm3x")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0.0225956, 0, 8.06031)
+rotation_mode = 0
+loop = false
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
+
+[node name="Path3D2" type="Path3D" parent="."]
+curve = SubResource("Curve3D_cjrlr")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D2"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, -0.0144222, 0, 7.90821)
+rotation_mode = 0
+loop = false
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D2/PathFollow3D"]
+
+[node name="Player" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.036643, 0, 7.99843)
+script = ExtResource("2_g0ul8")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Player"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_865dd")
+
+[node name="CameraPoint" type="Marker3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="PlayerCamera" type="Camera3D" parent="Player/CameraPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38419e-07, 1.3, -0.5)
+script = ExtResource("3_sloeb")
+
+[node name="RayCast3D" type="RayCast3D" parent="Player/CameraPoint"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.3, -0.5)
+target_position = Vector3(0, 0, 100)
+
+[node name="Gun" type="MeshInstance3D" parent="Player/CameraPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -1.476)
+mesh = SubResource("BoxMesh_vpk2a")
+surface_material_override/0 = SubResource("StandardMaterial3D_ix7ev")
+
+[node name="Target" type="Marker3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, -2)
+
+[node name="Targets" type="Node" parent="."]
+
+[node name="FunnyColider" type="StaticBody3D" parent="Targets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -8)
+script = ExtResource("2_e6vb0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/FunnyColider"]
+shape = SubResource("BoxShape3D_bje2j")
+
+[node name="Box" type="MeshInstance3D" parent="Targets/FunnyColider"]
+mesh = SubResource("BoxMesh_1887g")
+skeleton = NodePath("../../..")
+
+[node name="FunnyColider2" type="StaticBody3D" parent="Targets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.959984, 3.2212, -4.45798)
+script = ExtResource("2_e6vb0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/FunnyColider2"]
+shape = SubResource("BoxShape3D_bje2j")
+
+[node name="Box" type="MeshInstance3D" parent="Targets/FunnyColider2"]
+mesh = SubResource("BoxMesh_1887g")
+skeleton = NodePath("../../..")
+
+[node name="FunnyColider3" type="StaticBody3D" parent="Targets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51583, 2.84634, -3.46489)
+script = ExtResource("2_e6vb0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/FunnyColider3"]
+shape = SubResource("BoxShape3D_bje2j")
+
+[node name="Box" type="MeshInstance3D" parent="Targets/FunnyColider3"]
+mesh = SubResource("BoxMesh_1887g")
+skeleton = NodePath("../../..")
+
+[node name="FunnyColider4" type="StaticBody3D" parent="Targets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.70753, 2.36119, -5.51728)
+script = ExtResource("2_e6vb0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/FunnyColider4"]
+shape = SubResource("BoxShape3D_bje2j")
+
+[node name="Box" type="MeshInstance3D" parent="Targets/FunnyColider4"]
+mesh = SubResource("BoxMesh_1887g")
+skeleton = NodePath("../../..")
+
+[node name="FunnyColider5" type="StaticBody3D" parent="Targets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42343, 1.23036, -0.0552897)
+script = ExtResource("2_e6vb0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/FunnyColider5"]
+shape = SubResource("BoxShape3D_bje2j")
+
+[node name="Box" type="MeshInstance3D" parent="Targets/FunnyColider5"]
+mesh = SubResource("BoxMesh_1887g")
+skeleton = NodePath("../../..")
+
+[node name="FunnyColider6" type="StaticBody3D" parent="Targets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.69371, 2.04141, -0.783555)
+script = ExtResource("2_e6vb0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/FunnyColider6"]
+shape = SubResource("BoxShape3D_bje2j")
+
+[node name="Box" type="MeshInstance3D" parent="Targets/FunnyColider6"]
+mesh = SubResource("BoxMesh_1887g")
+skeleton = NodePath("../../..")
