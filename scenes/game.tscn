@@ -1,9 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://d0bfn451ha1lf"]
+[gd_scene load_steps=14 format=3 uid="uid://d0bfn451ha1lf"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_yxuc1"]
+[ext_resource type="PackedScene" uid="uid://dr8m1no0mgiso" path="res://scenes/entities/player.tscn" id="2_2brr1"]
 [ext_resource type="Script" path="res://scripts/Box.gd" id="2_e6vb0"]
-[ext_resource type="Script" path="res://scripts/Player.gd" id="2_g0ul8"]
-[ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="3_sloeb"]
 [ext_resource type="PackedScene" uid="uid://b0parfryyenau" path="res://scenes/components/point_to_next_challenge.tscn" id="5_up4ad"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_us0gi"]
@@ -37,15 +36,6 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0)
 }
 point_count = 3
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_865dd"]
-height = 1.8
-
-[sub_resource type="BoxMesh" id="BoxMesh_vpk2a"]
-size = Vector3(0.2, 0.2, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ix7ev"]
-albedo_color = Color(0.0705882, 0.945098, 0.988235, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bje2j"]
 
@@ -94,30 +84,7 @@ loop = false
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D2/PathFollow3D"]
 
-[node name="Player" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.036643, 0, 7.99843)
-mass = 10.0
-gravity_scale = 0.0
-script = ExtResource("2_g0ul8")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-shape = SubResource("CapsuleShape3D_865dd")
-
-[node name="CameraPoint" type="Marker3D" parent="Player"]
-
-[node name="PlayerCamera" type="Camera3D" parent="Player/CameraPoint"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38419e-07, 1.3, -0.5)
-script = ExtResource("3_sloeb")
-
-[node name="GunPivot" type="Marker3D" parent="Player/CameraPoint"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.8, -0.5)
-
-[node name="Gun" type="MeshInstance3D" parent="Player/CameraPoint/GunPivot"]
-transform = Transform3D(-1, 6.21176e-22, 8.74228e-08, 5.04871e-29, 1, 0, -8.74227e-08, -7.10543e-15, -1, -5.21541e-08, 5.96046e-08, 0.576001)
-mesh = SubResource("BoxMesh_vpk2a")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_ix7ev")
+[node name="Player" parent="." instance=ExtResource("2_2brr1")]
 
 [node name="Targets" type="Node" parent="."]
 

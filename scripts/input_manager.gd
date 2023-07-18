@@ -1,12 +1,25 @@
 extends Node
+class_name InputManager
 
-func _ready():
-#	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	pass
+signal weaponUp
+signal weaponDown
+signal shoot
+
 
 func _input(event):
 	if event.is_action_pressed("Exit"):
-		INPUTMANAGER.exit()
+		exit()
+	
+	if event is InputEventMouseButton and event.is_action_pressed("Shoot"):
+		shoot.emit()
+	
+	if event.is_action_pressed("Weapon_up"):
+		weaponUp.emit()
+	if event.is_action_pressed("Weapon_down"):
+		weaponDown.emit()
+
+
 
 func exit():
 	get_tree().quit()
+

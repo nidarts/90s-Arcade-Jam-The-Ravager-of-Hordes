@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=2 format=3 uid="uid://dudj6uoumumeg"]
+
+[ext_resource type="Script" path="res://scripts/resources/weapon_resource.gd" id="1_mx8gm"]
+
+[resource]
+script = ExtResource("1_mx8gm")
+weapon_name = "Machinegun"
+activate_animation = "weapon_activate"
+shoot_animation = "weapon_shoot"
+reload_animation = "weapon_reload"
+deactivate_animation = "weapon_deactivate"
+out_of_amo_animation = "weapon_out"
+current_amo = 30
+reserve_amo = 60
+magazine = 30
+max_amo = 60
+auto_fire = true

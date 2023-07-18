@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=2 format=3 uid="uid://c0bsrw6muavix"]
+
+[ext_resource type="Script" path="res://scripts/resources/weapon_resource.gd" id="1_6x7y8"]
+
+[resource]
+script = ExtResource("1_6x7y8")
+weapon_name = "Gun"
+activate_animation = "weapon_activate"
+shoot_animation = "weapon_shoot"
+reload_animation = "weapon_reload"
+deactivate_animation = "weapon_deactivate"
+out_of_amo_animation = "weapon_out"
+current_amo = 16
+reserve_amo = 16
+magazine = 8
+max_amo = 50
+auto_fire = false

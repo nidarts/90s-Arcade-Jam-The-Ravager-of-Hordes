@@ -6,6 +6,7 @@ class_name GameManager
 
 @onready var game : Game
 var player : Player
+var camera : PlayerCamera
 #var level
 #var gui
 

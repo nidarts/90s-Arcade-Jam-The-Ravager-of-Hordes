@@ -1,0 +1,268 @@
+[gd_scene load_steps=17 format=3 uid="uid://dr8m1no0mgiso"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_rwhw0"]
+[ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="2_m0iee"]
+[ext_resource type="Script" path="res://scripts/weapon_manager.gd" id="3_va4nb"]
+[ext_resource type="Resource" uid="uid://c0bsrw6muavix" path="res://resources/weapon_one.tres" id="4_0yrub"]
+[ext_resource type="Resource" uid="uid://d0xee45skcrqc" path="res://resources/weapon_two.tres" id="5_2etw6"]
+[ext_resource type="Resource" uid="uid://dudj6uoumumeg" path="res://resources/weapon_three.tres" id="6_g1i58"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_865dd"]
+height = 1.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_vpk2a"]
+size = Vector3(0.2, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ix7ev"]
+albedo_color = Color(0.0705882, 0.945098, 0.988235, 1)
+
+[sub_resource type="Animation" id="Animation_606b2"]
+resource_name = "weapon_activate"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Marker3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Marker3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(4.47035e-08, -0.7, -0.5), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Marker3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(2.73208, 1),
+"update": 0,
+"values": [Vector3(0, 0.785398, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6afso"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Marker3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Marker3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Marker3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yei7n"]
+resource_name = "weapon_deactivate"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Marker3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Marker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.436332, 9.03758e-09, -4.07659e-08), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Marker3D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(4.47035e-08, -0.7, -0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_ycjeo"]
+resource_name = "weapon_shoot"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Marker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0299451, 0.0600725, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(7.45058e-09, 0, -0.0999999), Vector3(7.45058e-09, 0.1, -0.0665455), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Marker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0299451, 0.0600725, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.0872665, 3.33942e-10, -7.6485e-09), Vector3(0.116461, 6.71219e-10, 1.02335e-08), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_k6ehu"]
+resource_name = "weapon_reload"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Marker3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.0734529, -0.158467, 0.430498), Vector3(0.159616, -0.160088, 0.416567), Vector3(0.0734529, -0.158467, 0.430498), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Marker3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_n8iq3"]
+resource_name = "weapon_out"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Marker3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.00221346, -0.00477532, 0.0129728), Vector3(0.00221346, -0.00477532, 0.0129728), Vector3(0.00174533, -0.00523599, 0.0122173)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Marker3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.05), Vector3(0.00174533, -0.00523599, 0.0122173)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uxeuy"]
+_data = {
+"RESET": SubResource("Animation_6afso"),
+"weapon_activate": SubResource("Animation_606b2"),
+"weapon_deactivate": SubResource("Animation_yei7n"),
+"weapon_out": SubResource("Animation_n8iq3"),
+"weapon_reload": SubResource("Animation_k6ehu"),
+"weapon_shoot": SubResource("Animation_ycjeo")
+}
+
+[node name="Player" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.036643, 0, 7.99843)
+mass = 10.0
+gravity_scale = 0.0
+script = ExtResource("1_rwhw0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_865dd")
+
+[node name="CameraPoint" type="Marker3D" parent="."]
+
+[node name="PlayerCamera" type="Camera3D" parent="CameraPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38419e-07, 1.3, -0.5)
+script = ExtResource("2_m0iee")
+
+[node name="WeaponManager" type="Node3D" parent="CameraPoint"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.8, -0.5)
+script = ExtResource("3_va4nb")
+_weapon_resources = Array[Resource("res://scripts/resources/weapon_resource.gd")]([ExtResource("4_0yrub"), ExtResource("5_2etw6"), ExtResource("6_g1i58")])
+start_weapon = Array[String](["Gun", "Shotgun"])
+
+[node name="Marker3D" type="Marker3D" parent="CameraPoint/WeaponManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Gun_One" type="MeshInstance3D" parent="CameraPoint/WeaponManager/Marker3D"]
+transform = Transform3D(-1, 6.21176e-22, 8.74228e-08, 5.04871e-29, 1, 0, -8.74227e-08, -7.10543e-15, -1, -5.21541e-08, 5.96046e-08, 0.576001)
+mesh = SubResource("BoxMesh_vpk2a")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ix7ev")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraPoint/WeaponManager"]
+libraries = {
+"": SubResource("AnimationLibrary_uxeuy")
+}
+
+[connection signal="animation_finished" from="CameraPoint/WeaponManager/AnimationPlayer" to="CameraPoint/WeaponManager" method="_on_animation_player_animation_finished"]
