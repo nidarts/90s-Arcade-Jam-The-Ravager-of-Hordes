@@ -4,6 +4,11 @@ class_name InputManager
 signal weaponUp
 signal weaponDown
 signal shoot
+signal reload
+signal weapon_changed(weapon_name : String)
+signal update_amo(weapon_amo : Array)
+
+var can_auto_shoot : bool = false
 
 
 func _input(event):
@@ -12,6 +17,12 @@ func _input(event):
 	
 	if event is InputEventMouseButton and event.is_action_pressed("Shoot"):
 		shoot.emit()
+		can_auto_shoot = true
+	else:
+		can_auto_shoot = false
+	
+	if event.is_action_pressed("Reload"):
+		reload.emit()
 	
 	if event.is_action_pressed("Weapon_up"):
 		weaponUp.emit()

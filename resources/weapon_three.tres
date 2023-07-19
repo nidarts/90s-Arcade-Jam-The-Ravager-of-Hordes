@@ -6,8 +6,8 @@
 script = ExtResource("1_mx8gm")
 weapon_name = "Machinegun"
 activate_animation = "weapon_activate"
-shoot_animation = "weapon_shoot"
-reload_animation = "weapon_reload"
+shoot_animation = "weapon_three_shoot"
+reload_animation = "weapon_three_reload"
 deactivate_animation = "weapon_deactivate"
 out_of_amo_animation = "weapon_out"
 current_amo = 30

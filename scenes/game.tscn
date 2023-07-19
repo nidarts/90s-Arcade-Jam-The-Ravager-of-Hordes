@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://d0bfn451ha1lf"]
+[gd_scene load_steps=15 format=3 uid="uid://d0bfn451ha1lf"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_yxuc1"]
 [ext_resource type="PackedScene" uid="uid://dr8m1no0mgiso" path="res://scenes/entities/player.tscn" id="2_2brr1"]
 [ext_resource type="Script" path="res://scripts/Box.gd" id="2_e6vb0"]
+[ext_resource type="PackedScene" uid="uid://cc8rkbl8n2ma5" path="res://scenes/ui/hud.tscn" id="5_umyf3"]
 [ext_resource type="PackedScene" uid="uid://b0parfryyenau" path="res://scenes/components/point_to_next_challenge.tscn" id="5_up4ad"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_us0gi"]
@@ -45,6 +46,8 @@ point_count = 3
 script = ExtResource("1_yxuc1")
 first_path = NodePath("Path3D/PathFollow3D")
 first_remote = NodePath("Path3D/PathFollow3D/RemoteTransform3D")
+
+[node name="HUD" parent="." instance=ExtResource("5_umyf3")]
 
 [node name="Ground" type="StaticBody3D" parent="."]
 
