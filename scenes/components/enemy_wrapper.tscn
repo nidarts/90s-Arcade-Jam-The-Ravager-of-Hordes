@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvsl5nospue6o"]
+
+[ext_resource type="Script" path="res://scripts/enemy_wrapper.gd" id="1_llcm8"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_r4f6u"]
+
+[node name="EnemyWrapper" type="Node3D"]
+script = ExtResource("1_llcm8")
+
+[node name="Body_tmp" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_r4f6u")

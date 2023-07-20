@@ -1,7 +1,7 @@
 extends Node
 class_name Game
 
-const MOVESPEED: int = 3.0
+const MOVESPEED: float = 3.0
 
 @export var first_path : PathFollow3D
 @export var first_remote : RemoteTransform3D

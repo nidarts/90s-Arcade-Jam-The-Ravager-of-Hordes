@@ -13,45 +13,69 @@ script = ExtResource("1_6mm4p")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-anchors_preset = 15
+[node name="CurrentWeapon" type="Label" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PlayerStat" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 2
-
-[node name="HP" type="Label" parent="CanvasLayer/VBoxContainer/PlayerStat"]
-layout_mode = 2
-text = "100"
+offset_left = -300.0
+offset_top = -70.0
+offset_right = -50.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(200, 50)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "CurrentWeapon
+"
+horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Points" type="Label" parent="CanvasLayer/VBoxContainer/PlayerStat"]
-layout_mode = 2
+[node name="Points" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_top = 20.0
+offset_right = -50.0
+offset_bottom = 70.0
+grow_horizontal = 0
 size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 32
 text = "000"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="WeaponStat" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 10
-alignment = 2
-
-[node name="Amo" type="Label" parent="CanvasLayer/VBoxContainer/WeaponStat"]
-layout_mode = 2
-size_flags_horizontal = 2
-text = "8 / 10"
+[node name="HP" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.043
+anchor_top = 0.031
+anchor_right = 0.13
+anchor_bottom = 0.108
+offset_left = 0.463997
+offset_top = -0.0880013
+offset_right = 0.23999
+offset_bottom = 0.0159988
+pivot_offset = Vector2(25, 25)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "100"
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="CurrentWeapon" type="Label" parent="CanvasLayer/VBoxContainer/WeaponStat"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-text = "CurrentWeapon
-"
-horizontal_alignment = 2
+[node name="Amo" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -68.0
+offset_right = 150.0
+offset_bottom = -18.0
+grow_vertical = 0
+pivot_offset = Vector2(40, 30)
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "8 / 10"
 vertical_alignment = 1
