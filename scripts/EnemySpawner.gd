@@ -6,7 +6,7 @@ class_name EnemySpawner
 
 
 func _ready():
-	await get_tree().create_timer(15).timeout
+	await get_tree().create_timer(18).timeout
 	spawn_enemy()
 
 
@@ -14,7 +14,8 @@ func spawn_enemy():
 	var new_enemy : EnemyWrapper = enemy_to_spawn.instantiate()
 	new_enemy.position = self.global_position
 	get_parent().add_child(new_enemy)
-	GAMEMANAGER.new_point_to_move_enemy = target_move_position.global_position
+	new_enemy.init(target_move_position.global_position)
+#	GAMEMANAGER.new_point_to_move_enemy = target_move_position.global_position
 
 
 

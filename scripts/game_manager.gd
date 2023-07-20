@@ -11,4 +11,3 @@ var camera : PlayerCamera
 #var level
 #var gui
 
-var new_point_to_move_enemy : Vector3 = Vector3.ZERO
