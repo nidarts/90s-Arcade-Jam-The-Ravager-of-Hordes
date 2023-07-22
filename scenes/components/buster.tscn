@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://3u81cixv8obe"]
+
+[ext_resource type="Script" path="res://scripts/buster.gd" id="1_bgu3t"]
+[ext_resource type="PackedScene" uid="uid://8iqmyotcasn5" path="res://assets/models/HP-Buster.gltf" id="2_63ghd"]
+[ext_resource type="PackedScene" uid="uid://c8tu0g8m6nk1g" path="res://assets/models/Amo-Buster.gltf" id="3_enm3a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6jiya"]
+size = Vector3(1.5, 1.2, 1.3)
+
+[sub_resource type="Animation" id="Animation_dg5ar"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_po33q"]
+resource_name = "buster wobble"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.1, 0), Vector3(0, 0.25, 0), Vector3(0, 0.1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n2gt8"]
+_data = {
+"RESET": SubResource("Animation_dg5ar"),
+"buster wobble": SubResource("Animation_po33q")
+}
+
+[node name="Buster" type="StaticBody3D"]
+script = ExtResource("1_bgu3t")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.45, 0)
+shape = SubResource("BoxShape3D_6jiya")
+
+[node name="VisualContainer" type="Node3D" parent="."]
+
+[node name="HP-Buster" parent="VisualContainer" instance=ExtResource("2_63ghd")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+
+[node name="Amo-Buster" parent="VisualContainer" instance=ExtResource("3_enm3a")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "buster wobble"
+libraries = {
+"": SubResource("AnimationLibrary_n2gt8")
+}

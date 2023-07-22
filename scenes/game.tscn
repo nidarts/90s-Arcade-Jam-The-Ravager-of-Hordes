@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d0bfn451ha1lf"]
+[gd_scene load_steps=17 format=3 uid="uid://d0bfn451ha1lf"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_yxuc1"]
 [ext_resource type="PackedScene" uid="uid://dr8m1no0mgiso" path="res://scenes/entities/player.tscn" id="2_2brr1"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cc8rkbl8n2ma5" path="res://scenes/ui/hud.tscn" id="5_umyf3"]
 [ext_resource type="PackedScene" uid="uid://b0parfryyenau" path="res://scenes/components/point_to_next_challenge.tscn" id="5_up4ad"]
 [ext_resource type="PackedScene" uid="uid://dthrk2e35gi7j" path="res://scenes/components/enemy_logic.tscn" id="6_rr51c"]
+[ext_resource type="PackedScene" uid="uid://3u81cixv8obe" path="res://scenes/components/buster.tscn" id="7_j6wvd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_us0gi"]
 size = Vector3(20, 0.2, 20)
@@ -27,14 +28,14 @@ tonemap_mode = 2
 
 [sub_resource type="Curve3D" id="Curve3D_hcm3x"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.0225956, 0, 8.06031, -0.515196, 0, 4.78396, 0.515196, 0, -4.78396, -4.13577, 0, 0.589969, 0, 0, 0, 0, 0, 0, -0.235003, 0, -7.87396),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.0225956, 0, 8.06031, -0.515196, 0, 4.78396, 0.515196, 0, -4.78396, -4.13577, 0, 0.589969, 0, 0, 0, 0, 0, 0, 9.69935e-05, 0, -8.00055),
 "tilts": PackedFloat32Array(0, 0, 0)
 }
 point_count = 3
 
 [sub_resource type="Curve3D" id="Curve3D_cjrlr"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.479906, 0, -7.85829, -3.56437, 0, -1.14476, 3.56437, 0, 1.14476, 4.38251, 0, 0.207088, 0, 0, 0, 0, 0, 0, 7.34848, 0, 8.37653),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.000235332, 0, -7.99922, -3.56437, 0, -1.14476, 3.56437, 0, 1.14476, 4.38251, 0, 0.207088, 0, 0, 0, 0, 0, 0, 7.34848, 0, 8.37653),
 "tilts": PackedFloat32Array(0, 0, 0)
 }
 point_count = 3
@@ -77,23 +78,25 @@ rotation_mode = 0
 loop = false
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
+update_rotation = false
 
 [node name="Path3D2" type="Path3D" parent="."]
 curve = SubResource("Curve3D_cjrlr")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D2"]
-transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0.479906, 0, -7.85829)
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, -0.000235332, 0, -7.99922)
 rotation_mode = 0
 loop = false
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D2/PathFollow3D"]
+update_rotation = false
 
 [node name="Player" parent="." instance=ExtResource("2_2brr1")]
 
 [node name="Targets" type="Node" parent="."]
 
 [node name="FunnyColider" type="StaticBody3D" parent="Targets"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.5, -5)
 script = ExtResource("2_e6vb0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/FunnyColider"]
@@ -115,7 +118,7 @@ mesh = SubResource("BoxMesh_1887g")
 skeleton = NodePath("../../..")
 
 [node name="FunnyColider3" type="StaticBody3D" parent="Targets"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51583, 2.84634, -3.46489)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51583, 2.84634, 2.53511)
 script = ExtResource("2_e6vb0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/FunnyColider3"]
@@ -126,7 +129,7 @@ mesh = SubResource("BoxMesh_1887g")
 skeleton = NodePath("../../..")
 
 [node name="FunnyColider4" type="StaticBody3D" parent="Targets"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.70753, 2.36119, -5.51728)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.70753, 2.36119, -3.51728)
 script = ExtResource("2_e6vb0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/FunnyColider4"]
@@ -137,7 +140,7 @@ mesh = SubResource("BoxMesh_1887g")
 skeleton = NodePath("../../..")
 
 [node name="FunnyColider5" type="StaticBody3D" parent="Targets"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42343, 1.23036, -0.0552897)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.42343, 1.23036, -0.0552897)
 script = ExtResource("2_e6vb0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/FunnyColider5"]
@@ -159,7 +162,19 @@ mesh = SubResource("BoxMesh_1887g")
 skeleton = NodePath("../../..")
 
 [node name="PointToNextChallenge" parent="." node_paths=PackedStringArray("next_path", "next_pathes_remote") instance=ExtResource("5_up4ad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 next_path = NodePath("../Path3D2/PathFollow3D")
 next_pathes_remote = NodePath("../Path3D2/PathFollow3D/RemoteTransform3D")
+player_target_rotation = Vector3(0, -170, 0)
+kills_needed_to_go = 3
 
 [node name="EnemyLogic" parent="." instance=ExtResource("6_rr51c")]
+
+[node name="BusterAmo" parent="." instance=ExtResource("7_j6wvd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.2, -3)
+buster = 1
+amo_count = 10
+
+[node name="BusterHP" parent="." instance=ExtResource("7_j6wvd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.2, -3)
+hp_count = 10

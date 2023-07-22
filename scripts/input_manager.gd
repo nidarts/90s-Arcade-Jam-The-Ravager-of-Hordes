@@ -9,6 +9,11 @@ signal weapon_changed(weapon_name : String)
 signal update_amo(weapon_amo : Array)
 
 var can_auto_shoot : bool = false
+var cross_cursor = preload("res://assets/sprites/croshire.png")
+
+
+func _ready():
+	Input.set_custom_mouse_cursor(cross_cursor, Input.CURSOR_ARROW, Vector2(8, 8))
 
 
 func _input(event):

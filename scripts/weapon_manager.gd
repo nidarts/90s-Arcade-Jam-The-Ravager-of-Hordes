@@ -5,7 +5,13 @@ class_name Weapon_Manager
 @export var _weapon_resources : Array[Weapon_Resource]
 @export var start_weapon : Array[String]
 
+
 @onready var animation_player = $AnimationPlayer
+
+@onready var gun = $Marker3D/Gun
+@onready var shotgun = $Marker3D/Shotgun
+@onready var machinegun = $Marker3D/Machinegun
+
 
 # треба ще зробити посилання на всі моделі зброї(коли будуть)
 # щоб робити її видимою/невидимою
@@ -28,6 +34,7 @@ func _ready():
 	INPUTMANAGER.reload.connect(reload)
 	INPUTMANAGER.weaponUp.connect(weapon_up)
 	INPUTMANAGER.weaponDown.connect(weapon_down)
+	GAMEMANAGER.player_add_amo.connect(add_amo)
 
 func initialize(_start_weapon: Array):
 	for weapon in _weapon_resources:
@@ -54,6 +61,19 @@ func exit(_next_weapon: String):
 		if animation_player.get_current_animation() != current_weapon.deactivate_animation:
 			animation_player.play(current_weapon.deactivate_animation)
 			next_weapon = _next_weapon
+			
+			await animation_player.animation_finished
+			gun.visible = false
+			shotgun.visible = false
+			machinegun.visible = false
+			
+			if _next_weapon == "Gun":
+				gun.visible = true
+			if _next_weapon == "Machinegun":
+				machinegun.visible = true
+			if _next_weapon == "Shotgun":
+				shotgun.visible = true
+			
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == current_weapon.deactivate_animation:
@@ -106,19 +126,33 @@ func shoot():
 	var raycast_result = space_state.intersect_ray(physics_raycast_query)
 	
 	
-	if current_weapon.current_amo != 0:
-		if !animation_player.is_playing():
-			animation_player.play(current_weapon.shoot_animation)
-			current_weapon.current_amo -= 1
-			INPUTMANAGER.update_amo.emit([current_weapon.current_amo, current_weapon.reserve_amo])
-		
 	
-		if raycast_result.is_empty():
-			print("")
+	if raycast_result.is_empty():
+		if current_weapon.current_amo != 0:
+			play_shoot_animation()
 		else:
-			var col = raycast_result.collider
+			reload()
+	else:
+		var col = raycast_result.collider
+		if current_weapon.current_amo != 0:
+			play_shoot_animation()
 			if col is Box:
 				col.say_comething()
-	else:
-		reload()
+		else:
+			reload()
+		
+		if col is Buster:
+			col.add_bust()
 	
+
+func add_amo(val: int):
+	current_weapon.reserve_amo += val
+	current_weapon.reserve_amo = min(current_weapon.reserve_amo, current_weapon.max_amo)
+	INPUTMANAGER.update_amo.emit([current_weapon.current_amo, current_weapon.reserve_amo])
+	
+
+func play_shoot_animation():
+	if !animation_player.is_playing():
+		animation_player.play(current_weapon.shoot_animation)
+		current_weapon.current_amo -= 1
+		INPUTMANAGER.update_amo.emit([current_weapon.current_amo, current_weapon.reserve_amo])

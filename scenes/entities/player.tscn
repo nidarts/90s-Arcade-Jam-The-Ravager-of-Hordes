@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dr8m1no0mgiso"]
+[gd_scene load_steps=32 format=3 uid="uid://dr8m1no0mgiso"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_rwhw0"]
 [ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="2_m0iee"]
@@ -7,9 +7,12 @@
 [ext_resource type="Resource" uid="uid://d0xee45skcrqc" path="res://resources/weapon_two.tres" id="5_2etw6"]
 [ext_resource type="Resource" uid="uid://dudj6uoumumeg" path="res://resources/weapon_three.tres" id="6_g1i58"]
 [ext_resource type="Texture2D" uid="uid://cl1oqom1uns14" path="res://assets/sprites/gun_fire.png" id="7_cv1tk"]
+[ext_resource type="PackedScene" uid="uid://bpxv88kfkokg" path="res://assets/models/Gun.gltf" id="8_su7rs"]
 [ext_resource type="AudioStream" uid="uid://dlrevii8ddvvi" path="res://assets/audio/weapon_switch.ogg" id="8_ysy0d"]
 [ext_resource type="AudioStream" uid="uid://lxv5omvjyxj8" path="res://assets/audio/weapon_one_reload.ogg" id="9_fdgdf"]
+[ext_resource type="PackedScene" uid="uid://bvrjydwa6jygd" path="res://assets/models/Shotgun.gltf" id="9_poddg"]
 [ext_resource type="AudioStream" uid="uid://da0d2tbp2413u" path="res://assets/audio/weapon_one_shoot.ogg" id="10_irca5"]
+[ext_resource type="PackedScene" uid="uid://c621pdlx6d0wr" path="res://assets/models/Machinegun.gltf" id="10_yl0wf"]
 [ext_resource type="AudioStream" uid="uid://cea3kgu0cjrpn" path="res://assets/audio/weapon_three_reload.ogg" id="11_7s2cp"]
 [ext_resource type="Texture2D" uid="uid://dvfatfsu84mqk" path="res://assets/sprites/machinegun_fire.png" id="11_c8p3o"]
 [ext_resource type="AudioStream" uid="uid://cflx1cubnw0f2" path="res://assets/audio/weapon_three_shoot.ogg" id="12_ufj7l"]
@@ -19,12 +22,6 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_865dd"]
 height = 1.8
-
-[sub_resource type="BoxMesh" id="BoxMesh_vpk2a"]
-size = Vector3(0.2, 0.2, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ix7ev"]
-albedo_color = Color(0.0705882, 0.945098, 0.988235, 1)
 
 [sub_resource type="Animation" id="Animation_6afso"]
 length = 0.001
@@ -610,16 +607,21 @@ start_weapon = Array[String](["Gun", "Shotgun", "Machinegun"])
 
 [node name="Marker3D" type="Marker3D" parent="CameraPoint/WeaponManager"]
 
-[node name="Gun_One" type="MeshInstance3D" parent="CameraPoint/WeaponManager/Marker3D"]
-transform = Transform3D(-1, 6.21176e-22, 8.74228e-08, 5.04871e-29, 1, 0, -8.74227e-08, -7.10543e-15, -1, -5.21541e-08, 5.96046e-08, 0.576001)
-mesh = SubResource("BoxMesh_vpk2a")
-skeleton = NodePath("../../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_ix7ev")
-
 [node name="Fire_sprite" type="Sprite3D" parent="CameraPoint/WeaponManager/Marker3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.04308e-07, 0, 1.2)
 visible = false
 texture = ExtResource("7_cv1tk")
+
+[node name="Gun" parent="CameraPoint/WeaponManager/Marker3D" instance=ExtResource("8_su7rs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0034499, -0.300159, 0.189754)
+
+[node name="Shotgun" parent="CameraPoint/WeaponManager/Marker3D" instance=ExtResource("9_poddg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.403662, -0.00345004, 0.110403)
+visible = false
+
+[node name="Machinegun" parent="CameraPoint/WeaponManager/Marker3D" instance=ExtResource("10_yl0wf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.172505, -0.0138006)
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CameraPoint/WeaponManager"]
 libraries = {

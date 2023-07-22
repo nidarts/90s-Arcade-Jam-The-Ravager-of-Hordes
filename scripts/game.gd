@@ -6,6 +6,8 @@ const MOVESPEED: float = 3.0
 @export var first_path : PathFollow3D
 @export var first_remote : RemoteTransform3D
 
+
+
 var current_path : PathFollow3D:
 	set (new_value):
 		current_path = new_value
@@ -25,7 +27,8 @@ func _ready():
 	current_remote = first_remote
 
 func _physics_process(delta):
-	FollowCurrentPath(current_path, delta)
+	if GAMEMANAGER.kills_needed <= 0:
+		FollowCurrentPath(current_path, delta)
 
 
 func SetCurrentRemote(new_remote: RemoteTransform3D):

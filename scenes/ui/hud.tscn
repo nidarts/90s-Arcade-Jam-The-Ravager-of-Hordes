@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://cc8rkbl8n2ma5"]
+[gd_scene load_steps=5 format=3 uid="uid://cc8rkbl8n2ma5"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_6mm4p"]
+[ext_resource type="Texture2D" uid="uid://dlv4njo510x21" path="res://assets/sprites/hud-sprites.png" id="2_sfnh4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctl6n"]
+atlas = ExtResource("2_sfnh4")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydtvq"]
+atlas = ExtResource("2_sfnh4")
+region = Rect2(128, 128, 128, 128)
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -14,6 +23,7 @@ script = ExtResource("1_6mm4p")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="CurrentWeapon" type="Label" parent="CanvasLayer"]
+visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -33,6 +43,20 @@ text = "CurrentWeapon
 horizontal_alignment = 2
 vertical_alignment = 1
 
+[node name="WeaponIco" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -178.0
+offset_top = -128.0
+offset_right = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(127, 127)
+texture = SubResource("AtlasTexture_ctl6n")
+
 [node name="Points" type="Label" parent="CanvasLayer"]
 anchors_preset = 1
 anchor_left = 1.0
@@ -42,9 +66,10 @@ offset_top = 20.0
 offset_right = -50.0
 offset_bottom = 70.0
 grow_horizontal = 0
+pivot_offset = Vector2(251, 25)
 size_flags_horizontal = 10
 theme_override_font_sizes/font_size = 32
-text = "000"
+text = "0"
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -58,23 +83,31 @@ offset_left = 0.463997
 offset_top = -0.0880013
 offset_right = 0.23999
 offset_bottom = 0.0159988
-pivot_offset = Vector2(25, 25)
+pivot_offset = Vector2(0, 27)
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "100"
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Amo" type="Label" parent="CanvasLayer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 50.0
+offset_left = 40.0
 offset_top = -68.0
-offset_right = 150.0
-offset_bottom = -18.0
+offset_right = 174.0
+offset_bottom = -20.0
 grow_vertical = 0
-pivot_offset = Vector2(40, 30)
+pivot_offset = Vector2(133, 47)
+
+[node name="AmoIco" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_ydtvq")
+expand_mode = 3
+
+[node name="Amo" type="Label" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 32
 text = "8 / 10"

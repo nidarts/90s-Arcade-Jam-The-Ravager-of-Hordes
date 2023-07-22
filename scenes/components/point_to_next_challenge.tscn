@@ -8,9 +8,9 @@ radius = 1.0
 [node name="PointToNextChallenge" type="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
 script = ExtResource("1_ly886")
+player_target_rotation = Vector3(0, 70, 0)
 
 [node name="Collider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 0, 0)
 shape = SubResource("SphereShape3D_6rixy")
 
 [node name="Wait" type="Timer" parent="."]

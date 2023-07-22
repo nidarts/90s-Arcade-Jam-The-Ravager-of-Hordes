@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dthrk2e35gi7j"]
 
 [ext_resource type="Script" path="res://scripts/EnemySpawner.gd" id="1_4xoc0"]
-[ext_resource type="PackedScene" uid="uid://b1wfpbimujgp0" path="res://scenes/entities/enemy_skeleton.tscn" id="2_0sqkn"]
+[ext_resource type="PackedScene" uid="uid://defuroe5qcs7f" path="res://scenes/entities/enemie_01.tscn" id="2_3rdbc"]
 
 [node name="EnemyLogic" type="Node3D"]
 
@@ -9,7 +9,7 @@
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
 script = ExtResource("1_4xoc0")
 target_move_position = NodePath("../EnemyTarget")
-enemy_to_spawn = ExtResource("2_0sqkn")
+enemy_to_spawn = ExtResource("2_3rdbc")
 
 [node name="EnemyTarget" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
