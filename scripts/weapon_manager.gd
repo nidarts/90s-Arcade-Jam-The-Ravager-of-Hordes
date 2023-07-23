@@ -5,6 +5,10 @@ class_name Weapon_Manager
 @export var _weapon_resources : Array[Weapon_Resource]
 @export var start_weapon : Array[String]
 
+@export_category("Налаштування для потужності зброї")
+@export var gun_power : int = 1
+@export var machinegun_power : int = 1
+@export var shotgun_power : int = 2
 
 @onready var animation_player = $AnimationPlayer
 
@@ -136,8 +140,13 @@ func shoot():
 		var col = raycast_result.collider
 		if current_weapon.current_amo != 0:
 			play_shoot_animation()
-			if col is Box:
-				col.say_comething()
+			if col is EnemyWrapper:
+				if current_weapon.weapon_name == "Gun":
+					col.TakeDamage(gun_power)
+				if current_weapon.weapon_name == "Machinegun":
+					col.TakeDamage(machinegun_power)
+				if current_weapon.weapon_name == "Shotgun":
+					col.TakeDamage(shotgun_power)
 		else:
 			reload()
 		

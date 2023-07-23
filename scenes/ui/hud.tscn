@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cc8rkbl8n2ma5"]
+[gd_scene load_steps=6 format=3 uid="uid://cc8rkbl8n2ma5"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_6mm4p"]
+[ext_resource type="LabelSettings" uid="uid://n5e8qptlqcw8" path="res://scenes/ui/hud-settings.tres" id="2_547ie"]
 [ext_resource type="Texture2D" uid="uid://dlv4njo510x21" path="res://assets/sprites/hud-sprites.png" id="2_sfnh4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ctl6n"]
@@ -40,6 +41,7 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "CurrentWeapon
 "
+label_settings = ExtResource("2_547ie")
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -70,8 +72,8 @@ pivot_offset = Vector2(251, 25)
 size_flags_horizontal = 10
 theme_override_font_sizes/font_size = 32
 text = "0"
+label_settings = ExtResource("2_547ie")
 horizontal_alignment = 2
-vertical_alignment = 1
 
 [node name="HP" type="Label" parent="CanvasLayer"]
 anchors_preset = -1
@@ -87,7 +89,7 @@ pivot_offset = Vector2(0, 27)
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "100"
-vertical_alignment = 1
+label_settings = ExtResource("2_547ie")
 metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
@@ -96,10 +98,10 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 40.0
 offset_top = -68.0
-offset_right = 174.0
+offset_right = 222.0
 offset_bottom = -20.0
 grow_vertical = 0
-pivot_offset = Vector2(133, 47)
+pivot_offset = Vector2(109, 22)
 
 [node name="AmoIco" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
@@ -109,6 +111,6 @@ expand_mode = 3
 [node name="Amo" type="Label" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 0
 text = "8 / 10"
-vertical_alignment = 1
+label_settings = ExtResource("2_547ie")

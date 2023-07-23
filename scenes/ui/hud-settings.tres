@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://n5e8qptlqcw8"]
+
+[ext_resource type="FontFile" uid="uid://cubqxifv7iara" path="res://assets/fonts/Pentapixel.ttf" id="1_jf0lq"]
+
+[resource]
+line_spacing = 0.0
+font = ExtResource("1_jf0lq")
+font_size = 60

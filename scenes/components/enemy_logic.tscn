@@ -6,10 +6,10 @@
 [node name="EnemyLogic" type="Node3D"]
 
 [node name="EnemySpawner" type="Marker3D" parent="." node_paths=PackedStringArray("target_move_position")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -3.02625)
 script = ExtResource("1_4xoc0")
 target_move_position = NodePath("../EnemyTarget")
 enemy_to_spawn = ExtResource("2_3rdbc")
 
 [node name="EnemyTarget" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.02625)
