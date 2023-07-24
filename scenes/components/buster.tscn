@@ -45,6 +45,7 @@ _data = {
 }
 
 [node name="Buster" type="StaticBody3D"]
+collision_layer = 2
 script = ExtResource("1_bgu3t")
 
 [node name="Collision" type="CollisionShape3D" parent="."]

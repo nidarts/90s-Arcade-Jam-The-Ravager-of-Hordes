@@ -126,7 +126,7 @@ func shoot():
 	mouse_position = camera.get_viewport().get_mouse_position()
 	var raycast_origin = camera.project_ray_origin(mouse_position)
 	var raycast_target = raycast_origin + camera.project_ray_normal(mouse_position) * ray_length
-	var physics_raycast_query = PhysicsRayQueryParameters3D.create(raycast_origin, raycast_target)
+	var physics_raycast_query = PhysicsRayQueryParameters3D.create(raycast_origin, raycast_target, 2)
 	var raycast_result = space_state.intersect_ray(physics_raycast_query)
 	
 	

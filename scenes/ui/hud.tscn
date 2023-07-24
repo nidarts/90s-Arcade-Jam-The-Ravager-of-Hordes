@@ -11,6 +11,7 @@ region = Rect2(0, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydtvq"]
 atlas = ExtResource("2_sfnh4")
 region = Rect2(128, 128, 128, 128)
+filter_clip = true
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -51,13 +52,14 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -178.0
+offset_left = -148.0
 offset_top = -128.0
-offset_right = -50.0
+offset_right = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(127, 127)
 texture = SubResource("AtlasTexture_ctl6n")
+stretch_mode = 4
 
 [node name="Points" type="Label" parent="CanvasLayer"]
 anchors_preset = 1
@@ -81,10 +83,10 @@ anchor_left = 0.043
 anchor_top = 0.031
 anchor_right = 0.13
 anchor_bottom = 0.108
-offset_left = 0.463997
-offset_top = -0.0880013
-offset_right = 0.23999
-offset_bottom = 0.0159988
+offset_left = -14.032
+offset_top = 1.4
+offset_right = -14.256
+offset_bottom = 1.504
 pivot_offset = Vector2(0, 27)
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
@@ -96,9 +98,9 @@ metadata/_edit_use_anchors_ = true
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 40.0
+offset_left = 30.0
 offset_top = -68.0
-offset_right = 222.0
+offset_right = 212.0
 offset_bottom = -20.0
 grow_vertical = 0
 pivot_offset = Vector2(109, 22)

@@ -1,7 +1,7 @@
 extends Node
 class_name Game
 
-const MOVESPEED: float = 3.0
+const MOVESPEED: float = 4.0
 
 @export var first_path : PathFollow3D
 @export var first_remote : RemoteTransform3D
@@ -27,7 +27,7 @@ func _ready():
 	current_remote = first_remote
 
 func _physics_process(delta):
-	if GAMEMANAGER.kills_needed <= 0:
+	if GAMEMANAGER.kills_needed <= 0 && GAMEMANAGER.game.current_path != null:
 		FollowCurrentPath(current_path, delta)
 
 

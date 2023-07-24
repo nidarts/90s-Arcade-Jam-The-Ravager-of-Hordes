@@ -19,6 +19,6 @@ func change_damage(hp_val : int):
 func rotate_to_target(val: Vector3):
 	var rotate_tween := create_tween()
 #	rotate_tween.tween_property(self, "rotation_degrees", val, 2.0)
-#	rotate_tween.tween_property(self, "rotation_degrees", val, 2.0).from_current()
+	rotate_tween.tween_property(self, "rotation_degrees", val, 1.0).from_current()
 #	rotate_tween.tween_property(self, "rotation_degrees", val, 2.0).set_ease(Tween.EASE_IN_OUT)
-	rotate_tween.tween_property(self, "rotation_degrees", val, 2.0).set_delay(2.0)
+#	rotate_tween.tween_property(self, "rotation_degrees", val, 2.0).set_delay(2.0)

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://daaokp1y1qx5u" path="res://assets/sprites/shootgun_fire.png" id="4_u8uf1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v7fl7"]
-size = Vector3(0.8, 1.8, 0.8)
+size = Vector3(0.9, 1.8, 1.2)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_tikud"]
 resource_name = "Test_Enemy_skeleton"
@@ -4781,10 +4781,11 @@ _data = {
 }
 
 [node name="Enemie_01" type="StaticBody3D"]
+collision_layer = 2
 script = ExtResource("1_1gpw5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.25)
 shape = SubResource("BoxShape3D_v7fl7")
 
 [node name="Enemies" type="Node3D" parent="."]

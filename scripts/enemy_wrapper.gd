@@ -6,6 +6,7 @@ class_name EnemyWrapper
 @onready var tween_move : Tween
 
 @onready var animation_player = $AnimationPlayer
+@onready var collision_shape_3d = $CollisionShape3D
 
 var enemy_health : int = 3
 var random_state = RandomNumberGenerator.new()
@@ -52,17 +53,25 @@ func TakeDamage(val : int):
 		tween_move.kill()
 	
 	if enemy_health <= 0:
+		collision_shape_3d.disabled = true
 		animation_player.play("Handgun_Death03")
 		await animation_player.animation_finished
+		
+		GAMEMANAGER.TargetKill()
+		GAMEMANAGER.AddPoint(100)
+		
 		queue_free()
-		animation_player.stop(true)
+#		animation_player.stop(true)
+		return
 	else:
 		animation_player.play("Handgun_TakeDamage01")
 		await animation_player.animation_finished
-		if what_state_use == 0:
-			attack_player()
-		else:
-			beginning_move(target_to_move)
+		if enemy_health > 0:
+			if what_state_use == 0:
+				attack_player()
+			else:
+				beginning_move(target_to_move)
 	
+
 	
 

@@ -3,9 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://bixdi26acv0rx" path="res://assets/textures/Arcade_jam_texture.png" id="1_vivyr"]
 
 [resource]
-albedo_color = Color(0, 0, 0, 1)
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_color = Color(1, 1, 0.898039, 1)
+albedo_texture = ExtResource("1_vivyr")
 metallic_specular = 0.0
 emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_operator = 1
-emission_texture = ExtResource("1_vivyr")
+emission = Color(0.254902, 0.0196078, 0.0941176, 1)
