@@ -1,25 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0bfn451ha1lf"]
+[gd_scene load_steps=11 format=3 uid="uid://d0bfn451ha1lf"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_yxuc1"]
 [ext_resource type="PackedScene" uid="uid://dr8m1no0mgiso" path="res://scenes/entities/player.tscn" id="2_2brr1"]
+[ext_resource type="Texture2D" uid="uid://xii87hfgdrr5" path="res://assets/textures/sky.jpg" id="5_tp4ca"]
 [ext_resource type="PackedScene" uid="uid://cc8rkbl8n2ma5" path="res://scenes/ui/hud.tscn" id="5_umyf3"]
+[ext_resource type="PackedScene" uid="uid://csog72iegedtw" path="res://scenes/ui/menu.tscn" id="6_2qr0v"]
 [ext_resource type="PackedScene" uid="uid://v3h2a2wlkemn" path="res://scenes/levels/level_01.tscn" id="8_n5afo"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_34ep0"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_mpev4"]
-sky_material = SubResource("ProceduralSkyMaterial_34ep0")
-
-[sub_resource type="Environment" id="Environment_ers5n"]
-background_mode = 2
-sky = SubResource("Sky_mpev4")
-tonemap_mode = 2
-fog_enabled = true
-fog_light_color = Color(0.133333, 0.192157, 0.294118, 1)
-fog_density = 0.1
-fog_sky_affect = 0.75
 
 [sub_resource type="Curve3D" id="Curve3D_hcm3x"]
 _data = {
@@ -28,19 +14,27 @@ _data = {
 }
 point_count = 3
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lxptc"]
+panorama = ExtResource("5_tp4ca")
+
+[sub_resource type="Sky" id="Sky_d3g5l"]
+sky_material = SubResource("PanoramaSkyMaterial_lxptc")
+
+[sub_resource type="Environment" id="Environment_ers5n"]
+background_mode = 2
+sky = SubResource("Sky_d3g5l")
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.133333, 0.192157, 0.294118, 1)
+fog_density = 0.1
+fog_sky_affect = 0.8
+
 [node name="Game" type="Node" node_paths=PackedStringArray("first_path", "first_remote")]
 script = ExtResource("1_yxuc1")
 first_path = NodePath("Path3D/PathFollow3D")
 first_remote = NodePath("Path3D/PathFollow3D/RemoteTransform3D")
 
 [node name="HUD" parent="." instance=ExtResource("5_umyf3")]
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-light_color = Color(0.580392, 0.662745, 1, 1)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_ers5n")
 
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_hcm3x")
@@ -57,3 +51,14 @@ update_rotation = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.036643, 0, 4.99843)
 
 [node name="Level_01" parent="." instance=ExtResource("8_n5afo")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_color = Color(0.631373, 0.709804, 0.87451, 1)
+light_energy = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ers5n")
+
+[node name="Resulat Menu" parent="WorldEnvironment" instance=ExtResource("6_2qr0v")]
+visible = false

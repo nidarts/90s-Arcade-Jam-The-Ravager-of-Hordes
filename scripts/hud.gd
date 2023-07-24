@@ -1,4 +1,5 @@
 extends Control
+class_name HUD
 
 @onready var hp = $CanvasLayer/HP
 @onready var points = $CanvasLayer/Points
@@ -8,13 +9,15 @@ extends Control
 
 
 func _ready():
+	GAMEMANAGER.hud = self	
 	INPUTMANAGER.weapon_changed.connect(update_current_weapon)
 	INPUTMANAGER.update_amo.connect(update_amo)
 	GAMEMANAGER.player_health_changed.connect(update_hp)
 	GAMEMANAGER.player_add_win_points.connect(update_points)
 
 func update_hp(hp_val : int):
-	hp.set_text(str(hp_val))
+	var new_val = max(0, hp_val)
+	hp.set_text(str(new_val))
 	var size_tween := create_tween()
 	
 	size_tween.tween_property(hp, "scale", Vector2.ONE * 1.5, 0.2)

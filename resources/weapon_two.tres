@@ -13,5 +13,5 @@ out_of_amo_animation = "weapon_out"
 current_amo = 10
 reserve_amo = 25
 magazine = 10
-max_amo = 50
+max_amo = 25
 auto_fire = false

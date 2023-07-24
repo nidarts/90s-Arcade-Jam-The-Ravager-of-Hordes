@@ -17,17 +17,22 @@ class_name PointToNextChallenge
 # Час між спавном при вході в триггер
 @export var time_before_spawn : float = 2.0
 
+@export var this_is_last_point : bool = false
+
 # Рандомна точка наступного спавну
 var random_point_to_spawn = RandomNumberGenerator.new()
 var what_point_use = 0
 
 var current_spawn_count : int = 0
 
+@onready var can_spawn : bool = true
+
 @onready var wait_solution = $Wait
 
 
 func _ready():
 	wait_solution.wait_time = time_to_take_solution
+	GAMEMANAGER.player_die.connect(reset_all_spawn)
 
 
 func _on_body_entered(body):
@@ -50,6 +55,12 @@ func _on_body_entered(body):
 func AsignNextPath():
 	if next_path == null:
 		GAMEMANAGER.kills_needed = kills_needed_to_go
+		communicate_with_enemy_spawner()
+		
+# ВІДПРАВЛЯЄМО ПОВІДОМЛЕННЯ, ЩО МИ ПРОЙШЛИ РІВЕНЬ
+		if this_is_last_point:
+			GAMEMANAGER.player_win.emit()
+		
 		return
 		
 	GAMEMANAGER.game.current_path = next_path
@@ -77,4 +88,9 @@ func communicate_with_enemy_spawner():
 		
 
 func call_again_spawn():
-	communicate_with_enemy_spawner()
+	if can_spawn:
+		communicate_with_enemy_spawner()
+
+
+func reset_all_spawn():
+	can_spawn = false

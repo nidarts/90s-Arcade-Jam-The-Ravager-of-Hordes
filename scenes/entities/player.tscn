@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dr8m1no0mgiso"]
+[gd_scene load_steps=34 format=3 uid="uid://dr8m1no0mgiso"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_rwhw0"]
 [ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="2_m0iee"]
@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://daaokp1y1qx5u" path="res://assets/sprites/shootgun_fire.png" id="13_g3uxy"]
 [ext_resource type="AudioStream" uid="uid://cmd4p2x2ahmgv" path="res://assets/audio/weapon_two_reload.ogg" id="14_utxco"]
 [ext_resource type="AudioStream" uid="uid://c1h1n0qi403c1" path="res://assets/audio/weapon_two_shoot.ogg" id="15_nvgyd"]
+[ext_resource type="AudioStream" uid="uid://bchsnf0k212nw" path="res://assets/audio/oh_damage.ogg" id="20_30as1"]
+[ext_resource type="AudioStream" uid="uid://jhcae3dgjd51" path="res://assets/audio/my_buster.ogg" id="21_a14qf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_865dd"]
 height = 1.8
@@ -629,5 +631,11 @@ libraries = {
 }
 
 [node name="Player_audio" type="AudioStreamPlayer" parent="CameraPoint/WeaponManager"]
+
+[node name="Damage" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_30as1")
+
+[node name="My" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_a14qf")
 
 [connection signal="animation_finished" from="CameraPoint/WeaponManager/AnimationPlayer" to="CameraPoint/WeaponManager" method="_on_animation_player_animation_finished"]

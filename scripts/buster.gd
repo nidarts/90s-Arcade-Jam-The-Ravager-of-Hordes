@@ -15,6 +15,7 @@ enum BusterType{
 @export var hp_count : int
 @export var amo_count : int
 
+
 func _ready():
 	amo_buster.visible = false
 	hp_buster.visible = false
@@ -30,5 +31,7 @@ func add_bust():
 	
 	if buster == BusterType.Amo:
 		GAMEMANAGER.player_add_amo.emit(amo_count)
-		
+	
+	GAMEMANAGER.player.pickup_bust.play()
+	
 	self.queue_free()

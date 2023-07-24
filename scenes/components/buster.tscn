@@ -66,3 +66,9 @@ autoplay = "buster wobble"
 libraries = {
 "": SubResource("AnimationLibrary_n2gt8")
 }
+
+[node name="SpotLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 1.04712, 0.578192)
+light_color = Color(0.643137, 0.937255, 0.682353, 1)
+light_energy = 2.0
+omni_range = 2.00438

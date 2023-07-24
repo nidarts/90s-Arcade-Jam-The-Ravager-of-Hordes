@@ -1,9 +1,127 @@
-[gd_scene format=3 uid="uid://csog72iegedtw"]
+[gd_scene load_steps=15 format=3 uid="uid://csog72iegedtw"]
 
-[node name="Menu" type="Control"]
+[ext_resource type="FontFile" uid="uid://cubqxifv7iara" path="res://assets/fonts/Pentapixel.ttf" id="1_kevpc"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_nrqu2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ppvd"]
+bg_color = Color(0, 0, 0, 0.392157)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vjeqr"]
+font = ExtResource("1_kevpc")
+font_size = 60
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xaixf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nmsnr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_viv7r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1gmen"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hlla3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_63yek"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ocpot"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jepit"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v707y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j1cv2"]
+
+[node name="Resulat Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_nrqu2")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -250.0
+offset_right = 350.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3ppvd")
+
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Win-Lose" type="Label" parent="Container/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kevpc")
+theme_override_font_sizes/font_size = 100
+text = "YOU WIN!"
+horizontal_alignment = 1
+
+[node name="Score" type="VBoxContainer" parent="Container/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="ScoreTitle" type="Label" parent="Container/VBoxContainer/Score"]
+layout_mode = 2
+text = "SCORE"
+label_settings = SubResource("LabelSettings_vjeqr")
+horizontal_alignment = 1
+
+[node name="ScoreResult" type="Label" parent="Container/VBoxContainer/Score"]
+layout_mode = 2
+text = "000"
+label_settings = SubResource("LabelSettings_vjeqr")
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="Container/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(150, 75)
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Menu" type="Button" parent="Container/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_fonts/font = ExtResource("1_kevpc")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xaixf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_nmsnr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_viv7r")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_1gmen")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hlla3")
+text = "Main Menu"
+
+[node name="Again" type="Button" parent="Container/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kevpc")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxEmpty_63yek")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ocpot")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jepit")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_v707y")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_j1cv2")
+text = "Try Again"
+
+[connection signal="pressed" from="Container/VBoxContainer/Buttons/Menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/Buttons/Again" to="." method="_on_again_pressed"]

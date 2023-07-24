@@ -1,7 +1,15 @@
 extends Node3D
 class_name Player
 
-@export var player_health : int = 100
+@export var player_health : int = 100:
+	set(new_hp):
+		player_health = new_hp
+		if player_health <= 0:
+			GAMEMANAGER.player_die.emit()
+
+@onready var pickup_bust = $My
+@onready var damage_audio = $Damage
+
 
 func _ready():
 	GAMEMANAGER.player = self
@@ -10,6 +18,8 @@ func _ready():
 
 
 func change_damage(hp_val : int):
+	if hp_val < 0:
+		damage_audio.play()
 	player_health += hp_val
 	player_health = min(player_health, 100)
 	GAMEMANAGER.player_health_changed.emit(player_health)

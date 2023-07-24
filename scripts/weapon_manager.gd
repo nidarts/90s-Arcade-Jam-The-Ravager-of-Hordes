@@ -6,9 +6,9 @@ class_name Weapon_Manager
 @export var start_weapon : Array[String]
 
 @export_category("Налаштування для потужності зброї")
-@export var gun_power : int = 1
+@export var gun_power : int = 2
 @export var machinegun_power : int = 1
-@export var shotgun_power : int = 2
+@export var shotgun_power : int = 3
 
 @onready var animation_player = $AnimationPlayer
 
